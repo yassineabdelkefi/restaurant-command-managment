@@ -13,4 +13,4 @@ app.use('/api/restorant',routes)
 const prot=3000
 app.listen(prot,(err)=>{
     err ? console.log(err) : console.log('conected') 
-})
+});
