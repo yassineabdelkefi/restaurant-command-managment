@@ -26,35 +26,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `RestoManagment`.`client`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RestoManagment`.`client` (
-  `idclient` INT NOT NULL AUTO_INCREMENT,
-  `resto_idresto` INT NOT NULL,
-  PRIMARY KEY (`idclient`, `resto_idresto`),
-  INDEX `fk_client_resto_idx` (`resto_idresto` ASC) VISIBLE,
-  CONSTRAINT `fk_client_resto`
-    FOREIGN KEY (`resto_idresto`)
-    REFERENCES `RestoManagment`.`resto` (`idresto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `RestoManagment`.`orderr`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RestoManagment`.`orderr` (
   `idorder` INT NOT NULL AUTO_INCREMENT,
   `redyStatus` VARCHAR(45) NOT NULL,
   `Ordered` VARCHAR(45) NOT NULL,
-  `client_idclient` INT NOT NULL,
-  `client_resto_idresto` INT NOT NULL,
-  PRIMARY KEY (`idorder`, `client_idclient`, `client_resto_idresto`),
-  INDEX `fk_orderr_client1_idx` (`client_idclient` ASC, `client_resto_idresto` ASC) VISIBLE,
-  CONSTRAINT `fk_orderr_client1`
-    FOREIGN KEY (`client_idclient` , `client_resto_idresto`)
-    REFERENCES `RestoManagment`.`client` (`idclient` , `resto_idresto`)
+  `resto_idresto` INT NOT NULL,
+  PRIMARY KEY (`idorder`, `resto_idresto`),
+  INDEX `fk_orderr_resto1_idx` (`resto_idresto` ASC) VISIBLE,
+  CONSTRAINT `fk_orderr_resto1`
+    FOREIGN KEY (`resto_idresto`)
+    REFERENCES `RestoManagment`.`resto` (`idresto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

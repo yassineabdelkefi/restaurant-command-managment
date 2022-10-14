@@ -1,10 +1,9 @@
-const { response } = require('express')
-const { request } = require('http')
 const restorant=require('../models/restorant.js')
 
 
 module.exports={
     getDash:(request,response)=>{
+        
         restorant.dashBoar((err,result)=>{
             err ? response.status(500).send(err) : response.status(200).json(result)
         },request.body)
@@ -15,21 +14,20 @@ module.exports={
         },request.body)
     },
     dashHome:(request,response)=>{
+        
         restorant.dashHome((err,result)=>{
             err ? response.status(500).send(err) : response.status(200).json(result)
-        },request.body)
+        },request.params.id)
     },
     passorder:(request,response)=>{
+        console.log(request.body)
         restorant.passorder((err,result)=>{
             err ? response.status(500).send(err) : response.status(201).json(result)   
         },request.body)
     },
-    createC:(request,response)=>{
-        restorant.createClient((err,result)=>{
-            err ? response.status(500).send(err) : response.status(201).json(result)
-        },request.body)
-    },
+   
     updateDash:(request,response)=>{
+        
         restorant.updateDash((err,result)=>{
             err ? response.status(500).send(err) : response.status(200).json(result)
         },request.body)
